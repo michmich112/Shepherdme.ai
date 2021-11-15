@@ -2,45 +2,56 @@
 
 <body style="background-color: #ffe9ec; height: 1100px; font-family: 'Trebuchet MS'">
   <div class="headerDiv">
-    <div class="head1" style = "padding-top: 20px;
+    <div class="head1" style="padding-top: 20px;
     text-align: center; margin-bottom: 30px;
     font-size:50px;
     color: #161748"> <b>Abuse Flagger</b> </div>
-    <div style = "width:90%; margin-left: 30px; margin-bottom: 30px;"><mat-divider></mat-divider></div>
+    <div style="width:90%; margin-left: 30px; margin-bottom: 30px;">
+      <mat-divider></mat-divider>
+    </div>
     <div class="head2" style=" 
           text-align: center;
           margin-bottom: 20px;
           font-size:large;
-          color: #161748 ;font-size:25px"><b>Am I facing abuse?</b>  </div>
-     <div style = "width:90%; margin-left: 30px; margin-bottom: 30px;"><mat-divider></mat-divider></div>
+          color: #161748 ;font-size:25px"><b>Am I facing abuse?</b> </div>
+    <div style="width:90%; margin-left: 30px; margin-bottom: 30px;">
+      <mat-divider></mat-divider>
+    </div>
   </div>
-  <div class="inputDiv" style="margin-left: 5px;">
+  <div class="inputDiv" style="margin-left: 5px; min-height: 370px;">
     <div style="margin-left: 55px; color: #161748;"> <b>Paste your text or upload your file</b></div>
-    <!-- <input type="text" class="inputBox" value="" id="myInput"> -->
-    <div>
-      <mat-form-field style = "width:100%; max-height: 100px;">
-        <textarea matInput id="myInput" class="inputBox" style = " height: 50px;
-        margin-top: 15px;
+    <div >
+      <mat-form-field style="width:100%; max-height: 100px;" appearance="none">
+        <textarea matInput id="myInput" class="inputBox" style=" height: 50px;
+        padding-left: 10px;
         margin-left: 50px;
+        padding-top: 10px;
         background-color :#C39EA0;
         width: 85%;
         color: white;" [(ngModel)]="text"></textarea>
       </mat-form-field>
     </div>
-  
-    <input type="file" id="myFile" name="filename" style="margin-left: 55px;">
+    <div style = "margin-bottom: 20px; margin-top: 30px;">
+      <ngx-file-drag-drop [formControl]="fileControl" activeBorderColor="#3F51B5" multiple
+      (valueChanged)="onValueChange($event)" style="height: 100px; width: 300px;">
+    </ngx-file-drag-drop>
+    </div>
+   
+    <!-- <input type="file" id="myFile" name="filename" style="margin-left: 55px;"> -->
     <!-- buttons -->
     <div style="margin-left: 78%; margin-top: 5px;">
       <button mat-button class="button" style="background-color: #000000; margin-left: 8px "
         onclick="document.getElementById('myInput').value = ''">Clear</button>
-      <button  mat-button class="button" style="background-color: #9bc400; margin-left: 10px; width: 75px;"
-        (click)="submitText('string');">Submit</button>
+      <button mat-button class="button" style="background-color: #9bc400; margin-left: 10px; width: 75px;"
+        (click)="submitText('file');">Submit</button>
     </div>
   </div>
-  <div style = "width:90%; margin-left: 30px; margin-bottom: 30px;"><mat-divider></mat-divider></div>
+  <div style="width:90%; margin-left: 30px; margin-bottom: 30px;">
+    <mat-divider></mat-divider>
+  </div>
   <div class="resultDiv" style="margin-left: 5px;">
     <div style="margin-left: 55px;color: #161748;"> <b>Classification</b></div>
-    
+
     <div style=" height: 40px;
         margin-top: 15px;
         margin-left: 50px;

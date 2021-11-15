@@ -8,6 +8,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { NgxFileDragDropModule } from "ngx-file-drag-drop";
+import { ReactiveFormsModule } from "@angular/forms";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule, 
     MatDividerModule, BrowserAnimationsModule,FormsModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule
+    MatButtonModule, MatFormFieldModule, MatInputModule,
+    NgxFileDragDropModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
