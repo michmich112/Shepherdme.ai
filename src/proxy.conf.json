@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "http://169.51.206.176:32451/model/predict",
+        "pathRewrite": {
+            "^/api": ""
+          },
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
