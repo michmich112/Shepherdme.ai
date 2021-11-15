@@ -30,7 +30,10 @@ export class AppComponent {
       response.subscribe(res=>{
         resp = res;
         console.log("post call response is ", resp);
+        this.parseResult(resp);
+        console.log("updated classification is , ", this.finalResult);
       })
+     
     } else if (value === "file") {
       this.parseTextFile(value);
     }
@@ -43,39 +46,18 @@ export class AppComponent {
   }
 
   getClassification() {
-    var response;
     return this.http.post(this.url, this.parsedjson)
-    // .map(res => res.json())
-    
-    // .subscribe(res => {
-    //   response = res;
-    // })
-    // return response;
   }
 
-  // getSelectOptionValue(): any {
-  //   let area_list_url = '/select_option_list/';
-
-  //   return this.urlGet(area_list_url).map( /// <<<=== use `map` here
-  //     (response) => {
-  //       let data = response.text() ? response.json() : [{}];
-
-  //       if (data) {
-  //         Constant.areaList = data;
-  //       }
-
-  //       return JSON.stringify(Constant.areaList);
-  //     }
-  //   );
-  // }
-
+ 
   parseResult(res) {
     var finalRes = "";
-    var pred = res['results'][0]
+    var pred = res['results'][0]['predictions']
     var max = 0;
     for (let [key, value] of Object.entries(pred)) {
       if (value > max && value > 0.3) {
-        max = parseInt(value.toString());
+        if(typeof value == "number")
+        max = value;
         finalRes = key;
       }
     }
