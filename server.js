@@ -13,6 +13,7 @@ const proxy = require('http-proxy-middleware')
 
 // var apiProxy = proxy('/api', {target: 'http://169.51.206.176:32451/model/predict'});
 
+   var apiProxy = proxy('/api', {target: 'http://169.51.206.176:32451/model/predict'});
 
 // Serve only the static files fr0m the dist directory
 app.use(express.static(__dirname + '/dist/AbuseFlagger'));
@@ -27,7 +28,6 @@ app.use(express.static(__dirname + '/dist/AbuseFlagger'));
 //     proxyReqPathResolver: req => url.parse(req.originalUrl).path
 // });
 
-var apiProxy = proxy('/api', {target: 'http://169.51.206.176:32451/model/predict'});
 //app.use('/api', apiProxy);
 
 app.get('/*', function(req,res) {
