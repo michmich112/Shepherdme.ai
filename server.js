@@ -7,7 +7,9 @@ const app = express();
 //var proxy = require('express-http-proxy');
 
 const url = require('url');
-const proxy = require('express-http-proxy');
+//const proxy = require('express-http-proxy');
+const proxy = require('http-proxy-middleware')
+
 
 // var apiProxy = proxy('/api', {target: 'http://169.51.206.176:32451/model/predict'});
 
@@ -21,16 +23,18 @@ app.use(express.static(__dirname + '/dist/AbuseFlagger'));
 
 
 // New hostname+path as specified by question:
-const apiProxy = proxy('http://169.51.206.176:32451/model/predict', {
-    proxyReqPathResolver: req => url.parse(req.originalUrl).path
-});
-app.use('/api', apiProxy);
+// const apiProxy = proxy('http://169.51.206.176:32451/model/predict', {
+//     proxyReqPathResolver: req => url.parse(req.originalUrl).path
+// });
+
+var apiProxy = proxy('/api', {target: 'http://169.51.206.176:32451/model/predict'});
+//app.use('/api', apiProxy);
 
 app.get('/*', function(req,res) {
  
 
 res.sendFile(path.join(__dirname+'/dist/AbuseFlagger/index.html'));
 });
-// app.use(apiProxy)
+app.use(apiProxy)
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
