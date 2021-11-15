@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'AbuseFlagger';
-  url = "http://localhost:4200/api";
+  url = "https://heroku-deployment-shepherme.herokuapp.com/api";
   parsedjson = {}
   text;
   finalResult = "";
