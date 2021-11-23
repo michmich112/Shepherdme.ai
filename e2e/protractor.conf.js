@@ -16,7 +16,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://shepherdme-a5e65.web.app/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

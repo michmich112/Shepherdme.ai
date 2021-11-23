@@ -89,6 +89,6 @@ export class AppComponent {
   }
 
   onValueChange(file: File[]) {
-    console.log("File changed!");
+    console.log("File changed now!");
   }
 }
