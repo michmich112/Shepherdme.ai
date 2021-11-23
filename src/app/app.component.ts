@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl } from "@angular/forms";
-import { FileValidators } from "ngx-file-drag-drop";
+import { FileValidators, NgxFileDragDropComponent } from "ngx-file-drag-drop";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,8 @@ export class AppComponent {
   fileControl = new FormControl(
     [],
     [FileValidators.required,
-    FileValidators.maxFileCount(1)]
+    FileValidators.maxFileCount(1),
+    FileValidators.fileExtension(['.txt','.TXT'])]
   );
   constructor(private http: HttpClient) { }
 
@@ -29,8 +30,13 @@ export class AppComponent {
   ngOnInit() {
     this.fileControl.valueChanges.subscribe((files: File[]) => {
       this.file = this.fileControl.value;
-      this.isFileUploaded = true;
-      this.parseTextFile();
+      console.log(this.file)
+      if(this.file.length !== 0 && this.file !== undefined && this.file !== null){
+        this.isFileUploaded = true;
+        this.parseTextFile();
+      } else {
+        this.isFileUploaded = false;
+      }
     }
     );
   }
@@ -38,6 +44,7 @@ export class AppComponent {
    submitText(value) {
     console.log("captured value as ", value);
     this.parsedjson = this.convertTextToJSON(this.isFileUploaded ? this.filetext: this.text);
+    // check if file type is .txt
     console.log("json is", this.parsedjson);
     var response = this.getClassification();
     var resp = null;
@@ -54,11 +61,13 @@ export class AppComponent {
     json["text"] = [text];
     return json;
   }
-
+  reset (){
+    document.getElementById('myInput')['value'] = '';
+    this.isFileUploaded = false; 
+  }
   getClassification() {
     return this.http.post(this.url, this.parsedjson)
   }
-
 
   parseResult(res) {
     var finalRes = "";
@@ -78,7 +87,16 @@ export class AppComponent {
       this.finalResult = (max * 100).toFixed(2) + "% " + finalRes
     }
   }
-
+  
+  clearText(){
+    document.getElementById('myInput')['value'] = '';
+    this.finalResult = "";
+    if(this.isFileUploaded) {
+      this.isFileUploaded = false; 
+    } else {
+      this.text = '';
+    }
+  }
   parseTextFile() {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {

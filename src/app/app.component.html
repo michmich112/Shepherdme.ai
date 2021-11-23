@@ -1,6 +1,6 @@
 <html style="">
 
-<body style="background-color: #ffe9ec; height: 1100px; font-family: 'Trebuchet MS'">
+<body style="background-color: #fceeeb; height: 1100px; font-family: 'Trebuchet MS'">
   <div class="headerDiv">
     <div class="head1" style="padding-top: 20px;
     text-align: center; margin-bottom: 30px;
@@ -18,32 +18,30 @@
       <mat-divider></mat-divider>
     </div>
   </div>
-  <div class="inputDiv" style="margin-left: 5px; min-height: 370px;">
+  <div class="inputDiv" style="margin-left: 5px; min-height: 430px;">
     <div style="margin-left: 55px; color: #161748;"> <b>Paste your text or upload your file</b></div>
     <div >
       <mat-form-field style="width:100%; max-height: 100px;" appearance="none">
-        <textarea matInput id="myInput" class="inputBox" style=" height: 50px;
+        <textarea matInput id="myInput" class="inputBox" style=" height: 80px;
         padding-left: 10px;
         margin-left: 50px;
         padding-top: 10px;
         background-color :#C39EA0;
         width: 85%;
-        color: white;" [(ngModel)]="text"></textarea>
+        color: white;" [(ngModel)]="text" [disabled] = "isFileUploaded"></textarea>
       </mat-form-field>
     </div>
-    <div style = "margin-bottom: 20px; margin-top: 30px;">
+    <div style=" margin-top: 20px ;color: #161748; text-align: center;"><b>Or</b></div>
+    <div style = "margin-bottom: 16px; margin-top: 30px;">
       <ngx-file-drag-drop [formControl]="fileControl" activeBorderColor="#3F51B5" multiple
-      (valueChanged)="onValueChange($event)" style="height: 100px; width: 300px;">
+      (valueChanged)="onValueChange($event)" style="height: 100px; width: 300px;" isEmpty = "isFileUploaded" [disabled] = "!(text == undefined || text == '')">
     </ngx-file-drag-drop>
     </div>
-   
-    <!-- <input type="file" id="myFile" name="filename" style="margin-left: 55px;"> -->
-    <!-- buttons -->
     <div style="margin-left: 78%; margin-top: 5px;">
       <button mat-button class="button" style="background-color: #000000; margin-left: 8px "
-        onclick="document.getElementById('myInput').value = ''">Clear</button>
+        (click)="clearText()">Clear</button>
       <button mat-button class="button" style="background-color: #9bc400; margin-left: 10px; width: 75px;"
-        (click)="submitText('file');">Submit</button>
+        (click)="submitText('file');" [disabled] = "!isFileUploaded && (text == undefined || text == '')">Submit</button>
     </div>
   </div>
   <div style="width:90%; margin-left: 30px; margin-bottom: 30px;">
