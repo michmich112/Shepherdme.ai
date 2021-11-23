@@ -10,7 +10,7 @@ import { FileValidators } from "ngx-file-drag-drop";
 })
 export class AppComponent {
   title = 'AbuseFlagger';
-  url = "https://shepherdme-a5e65.web.app";
+  url = "http://169.51.206.176:32451/model/predict";
   parsedjson = {}
   filetext;
   text;
